@@ -24,32 +24,50 @@ void initialiser_partie()
     img_fantome = charger_image("F bleu look B.png");
 }
 
-//fct° qui vérifie si pacman et les fantome se touche ou non
-int collision(PACMAN pacman, FANTOME fantome){
+//fct° qui vérifie si pacman et les fantome touche les murs
+int collision_mur(PACMAN pacman, FANTOME fantome){
     int c_pacman, c_fantome;
     POINT P, F;
     
-    P.x = pacman.position.x + 19;
+    P.x = pacman.position.x + 20;
+    P.y = pacman.position.y ;
+    
+    c_pacman = couleur_map(P);
+    
+    if(c_pacman == 1){
+        pacman.position.x = 0;
+        pacman.position.y = 0;
+    }
+        
+    P.x = pacman.position.x ;
     P.y = pacman.position.y + 20;
     
-    c_pacman = couleur_map(img_map_collision, P);
-    
-    if((c_pacman == 1) || (c_pacman == 2)){
-        
+    if(c_pacman == 1){
+        pacman.position.x = 0;
+        pacman.position.y = 0;
     }
     
-    F.x = pacman.position.x + 20;
-    F.y = pacman.position.y + 20;
+    P.x = pacman.position.x - 20;
+    P.y = pacman.position.y ;
     
-    c_fantome = couleur_map(img_map_collision, F);
-    
-    if((c_fantome == 1)){
-        
+    if(c_pacman == 1){
+        pacman.position.x = 0;
+        pacman.position.y = 0;
     }
     
-    if(c_fantome == 2){
-        
+    P.x = pacman.position.x ;
+    P.y = pacman.position.y - 20;
+    
+    if(c_pacman == 1){
+        pacman.position.x = 0;
+        pacman.position.y = 0;
     }
+    
+}
+
+//fct° qui vérifie la collision entre pacman et les fantome
+int collision(PACMAN pacman, FANTOME fantome){
+    
     
 }
 
