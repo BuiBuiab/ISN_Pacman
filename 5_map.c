@@ -13,6 +13,9 @@ int couleur_map(POINT p){
     
     c = lire_pixel_image(img_map_collision, p);
     
+    DebugInt("couleur lue", c);
+    DebugInt("couleur 1", couleur_RGB(255,0,0));
+    
     if(c == couleur_RGB(255, 0, 0)){
         return 1;
     }
@@ -20,4 +23,6 @@ int couleur_map(POINT p){
     if(c == couleur_RGB(0, 255, 255)){
         return 2;
     }
+    
+   
 }

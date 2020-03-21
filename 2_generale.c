@@ -25,44 +25,43 @@ void initialiser_partie()
 }
 
 //fct° qui vérifie si pacman et les fantome touche les murs
-int collision_mur(PACMAN pacman, FANTOME fantome){
-    int c_pacman, c_fantome;
-    POINT P, F;
+void collision_mur(PACMAN pacman){
+    int c_pacman;
+    POINT P;
     
     P.x = pacman.position.x + 20;
-    P.y = pacman.position.y ;
+    P.y = pacman.position.y;
     
     c_pacman = couleur_map(P);
     
     if(c_pacman == 1){
-        pacman.position.x = 0;
-        pacman.position.y = 0;
+        pacman.vitesse.x = 0;
+        pacman.vitesse.y = 0;
     }
-        
-    P.x = pacman.position.x ;
-    P.y = pacman.position.y + 20;
     
+    P.x = pacman.position.x ;
+    P.y = pacman.position.y+ 20;
+     
     if(c_pacman == 1){
-        pacman.position.x = 0;
-        pacman.position.y = 0;
+        pacman.vitesse.x = 0;
+        pacman.vitesse.y = 0;
     }
     
     P.x = pacman.position.x - 20;
-    P.y = pacman.position.y ;
-    
+    P.y = pacman.position.y;
+     
     if(c_pacman == 1){
-        pacman.position.x = 0;
-        pacman.position.y = 0;
+        pacman.vitesse.x = 0;
+        pacman.vitesse.y = 0;
     }
     
     P.x = pacman.position.x ;
     P.y = pacman.position.y - 20;
-    
+     
     if(c_pacman == 1){
-        pacman.position.x = 0;
-        pacman.position.y = 0;
+        pacman.vitesse.x = 0;
+        pacman.vitesse.y = 0;
     }
-    
 }
 
 //fct° qui vérifie la collision entre pacman et les fantome
