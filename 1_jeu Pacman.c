@@ -1,8 +1,8 @@
 #include "toolbox.h"
 
 /* Quelques constantes qui seront utilisees dans tout le programme */
-#define HAUTEUR 958             // Dimensions de l'écran
-#define LARGEUR 800
+#define HAUTEUR 1000             // Dimensions la photo map.png
+#define LARGEUR 900
 #define VITESSE 5               // Vitesse de déplacement
 
 #include "6_definition.c"
@@ -42,10 +42,10 @@ int main( int argc, char** argv )
         if(frame==20){
             frame = 0;}
             
-        
-        avancer_le_jeu();               // 2. On fait avancer la partie
         collision_mur(pacman);
-        jouer = continuer_a_jouer();    // 3. On teste si le joueur a perdu        
+        avancer_le_jeu();               // 2. On fait avancer la partie
+        
+        //jouer = continuer_a_jouer();    // 3. On teste si le joueur a perdu        
         attendre(30);                   // 4. Un pause pour que le jeu n'aille pas trop vite
     }   
     

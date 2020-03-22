@@ -27,6 +27,6 @@ FANTOME creer_fantome(){
 }*/
 
 //fct° qui envoie les fantômes (qui sont des bots) vers Pacman
-FANTOME vers_pacman(FANTOME f){
+/*FANTOME vers_pacman(FANTOME f){
 
-}
+}*/

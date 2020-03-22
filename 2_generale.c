@@ -10,7 +10,7 @@ float distance(POINT p, POINT p1){
 
 void initialiser_partie()
 {
-    initialiser_ecran( LARGEUR, HAUTEUR, "Pacman" ); 
+    initialiser_fenetre( LARGEUR, HAUTEUR, "Pacman" ); 
     affiche_auto_off();
     
     img_map = charger_image("map.png");
@@ -34,38 +34,18 @@ void collision_mur(PACMAN pacman){
     
     c_pacman = couleur_map(P);
     
-    if(c_pacman == 1){
-        pacman.vitesse.x = 0;
-        pacman.vitesse.y = 0;
-    }
+    printf("c_pacman = %d\n", c_pacman);
+    fflush(stdout);
     
-    P.x = pacman.position.x ;
-    P.y = pacman.position.y+ 20;
-     
     if(c_pacman == 1){
         pacman.vitesse.x = 0;
         pacman.vitesse.y = 0;
     }
-    
-    P.x = pacman.position.x - 20;
-    P.y = pacman.position.y;
-     
-    if(c_pacman == 1){
-        pacman.vitesse.x = 0;
-        pacman.vitesse.y = 0;
-    }
-    
-    P.x = pacman.position.x ;
-    P.y = pacman.position.y - 20;
-     
-    if(c_pacman == 1){
-        pacman.vitesse.x = 0;
-        pacman.vitesse.y = 0;
-    }
+
 }
 
 //fct° qui vérifie la collision entre pacman et les fantome
-int collision(PACMAN pacman, FANTOME fantome){
+/*int collision(PACMAN pacman, FANTOME fantome){
     
     
 }
@@ -73,7 +53,7 @@ int collision(PACMAN pacman, FANTOME fantome){
 //fct° qui vérifie les conditions de perte (renvoie 0 si le joueur à perdu)
 int continuer_a_jouer(){
 
-}
+}*/
 
 //fct° qui s'occupe de tout dessiner...
 void dessiner_le_jeu(int frame){
