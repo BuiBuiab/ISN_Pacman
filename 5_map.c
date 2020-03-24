@@ -26,5 +26,9 @@ int couleur_map(POINT p){
         couleur = 2;
     }
     
+    if(c == couleur_RGB(9, 250, 255)){
+        couleur = 3;
+    }
+    
     return couleur;
 }

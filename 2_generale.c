@@ -1,4 +1,5 @@
-float distance(POINT p, POINT p1){
+//au cas où j'en ai besoin
+/*float distance(POINT p, POINT p1){
 
     float dx, dy;
     
@@ -6,7 +7,7 @@ float distance(POINT p, POINT p1){
     dy = p.y - p1.y;
 
     return sqrt(dx*dx+dy*dy);
-}
+}*/
 
 void initialiser_partie()
 {
@@ -22,26 +23,6 @@ void initialiser_partie()
     
     fantome = creer_fantome();
     img_fantome = charger_image("F bleu look B.png");
-}
-
-//fct° qui vérifie si pacman et les fantome touche les murs
-void collision_mur(PACMAN pacman){
-    int c_pacman;
-    POINT P;
-    
-    P.x = pacman.position.x + 20;
-    P.y = pacman.position.y;
-    
-    c_pacman = couleur_map(P);
-    
-    printf("c_pacman = %d\n", c_pacman);
-    fflush(stdout);
-    
-    if(c_pacman == 1){
-        pacman.vitesse.x = 0;
-        pacman.vitesse.y = 0;
-    }
-
 }
 
 //fct° qui vérifie la collision entre pacman et les fantome
@@ -67,12 +48,27 @@ void dessiner_le_jeu(int frame){
 
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
-    POINT f;
-    
+    POINT f, P;
+    int c_pacman;
+
     f = lire_fleches();
     
-    pacman.vitesse.x = f.x * VITESSE;
-    pacman.vitesse.y = f.y * VITESSE;
+    P.x = pacman.position.x + 20;
+    P.y = pacman.position.y;
+    
+    c_pacman = couleur_map(P);
+    
+    printf("c_pacman = %d\n", c_pacman);
+    fflush(stdout);
+    
+    if(c_pacman == 3){
+        pacman.vitesse.x = f.x * VITESSE;
+        pacman.vitesse.y = f.y * VITESSE;
+    }
+    else{
+        pacman.vitesse.x = f.x - 5;
+        pacman.vitesse.y = f.y - 5;
+    }
     
     pacman.position.x += pacman.vitesse.x;
     pacman.position.y += pacman.vitesse.y;

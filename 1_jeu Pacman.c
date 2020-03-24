@@ -42,7 +42,7 @@ int main( int argc, char** argv )
         if(frame==20){
             frame = 0;}
             
-        collision_mur(pacman);
+        //collision_mur(pacman);
         avancer_le_jeu();               // 2. On fait avancer la partie
         
         //jouer = continuer_a_jouer();    // 3. On teste si le joueur a perdu        
