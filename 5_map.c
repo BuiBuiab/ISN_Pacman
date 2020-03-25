@@ -14,9 +14,9 @@ int couleur_map(POINT p){
     
     c = lire_pixel_image(img_map_collision, p);
     
-    printf("Couleur lue : 0x%08X\n", c);
+    /*printf("Couleur lue : 0x%08X\n", c);
     printf("Couleur  C1 : 0x%08X\n\n", couleur_RGB(9, 250, 255));
-    fflush(stdout);
+    fflush(stdout);*/
     
     if(c == couleur_RGB(255, 0, 0)){
         couleur = 1;

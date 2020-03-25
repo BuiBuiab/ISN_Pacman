@@ -25,6 +25,55 @@ void initialiser_partie()
     img_fantome = charger_image("F bleu look B.png");
 }
 
+//fct° qui vérifie si pacman et les fantome touche les murs
+int collision_mur(PACMAN pacman, POINT fleche){ 
+    int c_pacman, go; //go = 0 empèche pacman d'avancé
+    
+    POINT P;
+
+    if(fleche.x > 0){
+        P.x = pacman.position.x + 20;
+        P.y = pacman.position.y;}    
+    else{
+        P.x = pacman.position.x - 20;}
+    
+    
+    if(fleche.y > 0){
+        P.x = pacman.position.x ;
+        P.y = pacman.position.y + 20;}
+    else{
+        P.y = pacman.position.y - 20;}
+    
+    c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
+    
+    printf("c_pacman = %d\n", c_pacman);
+    fflush(stdout);
+    
+    if((c_pacman == 1) && (P.x == pacman.position.x + 20)){
+        go = 0;
+    }
+    else{
+        if((c_pacman == 1) && (P.x == pacman.position.x - 20)){
+            go = 1;
+        }
+    }
+    
+    if((c_pacman == 1) && (P.y == pacman.position.y + 20)){
+        go = 2;
+    }
+    else{
+        if((c_pacman == 1) && (P.y == pacman.position.y - 20)){
+            go = 3;
+        }
+    }
+    
+    if(c_pacman == 3){
+        go = 4;
+    }
+    
+    return go;
+}
+
 //fct° qui vérifie la collision entre pacman et les fantome
 /*int collision(PACMAN pacman, FANTOME fantome){
     
@@ -48,26 +97,38 @@ void dessiner_le_jeu(int frame){
 
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
-    POINT f, P;
-    int c_pacman;
-
+    POINT f;
+    int go;
+    
     f = lire_fleches();
+    go = collision_mur(pacman, f);
     
-    P.x = pacman.position.x + 20;
-    P.y = pacman.position.y;
+    //printf("go = %d\n", go);
+    //fflush(stdout);
     
-    c_pacman = couleur_map(P);
-    
-    printf("c_pacman = %d\n", c_pacman);
-    fflush(stdout);
-    
-    if(c_pacman == 3){
-        pacman.vitesse.x = f.x * VITESSE;
+    if(go == 0){
+        pacman.vitesse.x = f.x - 1;
         pacman.vitesse.y = f.y * VITESSE;
     }
-    else{
-        pacman.vitesse.x = f.x - 5;
-        pacman.vitesse.y = f.y - 5;
+    
+    if(go == 1){
+        pacman.vitesse.x = f.x + 1;
+        pacman.vitesse.y = f.y * VITESSE;
+    }
+    
+    if(go == 2){
+        pacman.vitesse.x = f.x * VITESSE;
+        pacman.vitesse.y = f.y - 1;
+    }
+    
+    if(go == 3){
+        pacman.vitesse.x = f.x * VITESSE;
+        pacman.vitesse.y = f.y + 1;
+    }
+        
+    if(go == 4){
+        pacman.vitesse.x = f.x * VITESSE;
+        pacman.vitesse.y = f.y * VITESSE;
     }
     
     pacman.position.x += pacman.vitesse.x;
