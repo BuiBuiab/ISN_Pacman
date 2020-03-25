@@ -34,14 +34,17 @@ int collision_mur(PACMAN pacman, POINT fleche){
     if(fleche.x > 0){
         P.x = pacman.position.x + 20;
         P.y = pacman.position.y;}    
-    else{
-        P.x = pacman.position.x - 20;}
-    
+        
+    if(fleche.x < 0){
+        P.x = pacman.position.x - 20;
+        P.y = pacman.position.y;}
     
     if(fleche.y > 0){
         P.x = pacman.position.x ;
         P.y = pacman.position.y + 20;}
-    else{
+        
+    if(fleche.y < 0){
+        P.x = pacman.position.x ;
         P.y = pacman.position.y - 20;}
     
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
