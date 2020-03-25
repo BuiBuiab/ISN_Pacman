@@ -32,40 +32,44 @@ int collision_mur(PACMAN pacman, POINT fleche){
     POINT P;
 
     if(fleche.x > 0){
-        P.x = pacman.position.x + 20;
+        P.x = pacman.position.x + 30;
         P.y = pacman.position.y;}    
         
     if(fleche.x < 0){
-        P.x = pacman.position.x - 20;
+        P.x = pacman.position.x - 30;
         P.y = pacman.position.y;}
     
     if(fleche.y > 0){
         P.x = pacman.position.x ;
-        P.y = pacman.position.y + 20;}
+        P.y = pacman.position.y + 30;}
         
     if(fleche.y < 0){
         P.x = pacman.position.x ;
-        P.y = pacman.position.y - 20;}
-    
+        P.y = pacman.position.y - 30;}
+        
+    if((fleche.x == 0) && (fleche.y == 0)){
+        P.x = pacman.position.x;
+        P.y = pacman.position.y;}
+
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
     printf("c_pacman = %d\n", c_pacman);
     fflush(stdout);
     
-    if((c_pacman == 1) && (P.x == pacman.position.x + 20)){
+    if((c_pacman == 1) && (P.x == pacman.position.x + 30)){
         go = 0;
     }
     else{
-        if((c_pacman == 1) && (P.x == pacman.position.x - 20)){
+        if((c_pacman == 1) && (P.x == pacman.position.x - 30)){
             go = 1;
         }
     }
     
-    if((c_pacman == 1) && (P.y == pacman.position.y + 20)){
+    if((c_pacman == 1) && (P.y == pacman.position.y + 30)){
         go = 2;
     }
     else{
-        if((c_pacman == 1) && (P.y == pacman.position.y - 20)){
+        if((c_pacman == 1) && (P.y == pacman.position.y - 30)){
             go = 3;
         }
     }
@@ -106,8 +110,9 @@ void avancer_le_jeu(){
     f = lire_fleches();
     go = collision_mur(pacman, f);
     
-    //printf("go = %d\n", go);
-    //fflush(stdout);
+    printf("coord.x flèches = %d\n", f.x);
+    printf("coord.y flèches = %d\n", f.y);
+    fflush(stdout);
     
     if(go == 0){
         pacman.vitesse.x = f.x - 1;
