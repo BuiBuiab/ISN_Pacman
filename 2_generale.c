@@ -25,9 +25,9 @@ void initialiser_partie()
     img_fantome = charger_image("F bleu look B.png");
 }
 
-//fct° qui vérifie si pacman et les fantome touche les murs
+//fct° qui vérifie si pacman touche les murs
 int collision_mur(PACMAN pacman, POINT fleche){ 
-    int c_pacman, go; //go = 0 empèche pacman d'avancé
+    int c_pacman, go = 4; 
     
     POINT P;
 
@@ -52,9 +52,6 @@ int collision_mur(PACMAN pacman, POINT fleche){
         P.y = pacman.position.y;}
 
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
-    
-    printf("c_pacman = %d\n", c_pacman);
-    fflush(stdout);
     
     if((c_pacman == 1) && (P.x == pacman.position.x + 30)){
         go = 0;
@@ -85,10 +82,16 @@ int collision_mur(PACMAN pacman, POINT fleche){
 /*int collision(PACMAN pacman, FANTOME fantome){
     
     
+}*/
+
+//fct qui centre pacman et les fantômes au millieu des couloirs 
+void centrer(PACMAN p, FANTOME f){
+    
 }
 
+
 //fct° qui vérifie les conditions de perte (renvoie 0 si le joueur à perdu)
-int continuer_a_jouer(){
+/*int continuer_a_jouer(){
 
 }*/
 
@@ -110,37 +113,42 @@ void avancer_le_jeu(){
     f = lire_fleches();
     go = collision_mur(pacman, f);
     
-    printf("coord.x flèches = %d\n", f.x);
-    printf("coord.y flèches = %d\n", f.y);
-    fflush(stdout);
-    
     if(go == 0){
-        pacman.vitesse.x = f.x - 1;
-        pacman.vitesse.y = f.y * VITESSE;
-    }
+        pacman.vitesse.x = f.x - 1;}
+    
     
     if(go == 1){
-        pacman.vitesse.x = f.x + 1;
-        pacman.vitesse.y = f.y * VITESSE;
-    }
+        pacman.vitesse.x = f.x + 1;}
+        
     
     if(go == 2){
-        pacman.vitesse.x = f.x * VITESSE;
-        pacman.vitesse.y = f.y - 1;
-    }
+        pacman.vitesse.y = f.y - 1;}
+    
     
     if(go == 3){
-        pacman.vitesse.x = f.x * VITESSE;
-        pacman.vitesse.y = f.y + 1;
-    }
+        pacman.vitesse.y = f.y + 1;}
+    
         
     if(go == 4){
         pacman.vitesse.x = f.x * VITESSE;
-        pacman.vitesse.y = f.y * VITESSE;
-    }
+        pacman.vitesse.y = f.y * VITESSE;}
     
-    pacman.position.x += pacman.vitesse.x;
-    pacman.position.y += pacman.vitesse.y;
+    
+    
+    if((f.x > 0) || (f.x < 0)){
+        pacman.vitesse.y = 0;
+        
+        pacman.position.x += pacman.vitesse.x;
+        pacman.position.y += pacman.vitesse.y;}
+      
+    
+    if((f.y > 0) || (f.y < 0)){
+        pacman.vitesse.x = 0;
+        
+        pacman.position.x += pacman.vitesse.x;
+        pacman.position.y += pacman.vitesse.y;}
+    
     
     //fantome = deplacer_fantome(fantome);
 }
+
