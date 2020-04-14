@@ -31,7 +31,7 @@ int collision_mur(PACMAN pacman, POINT fleche){
     
     POINT P;
 
-    //Suivant la direction, donne le points a regarder pour la collision
+    //Suivant la direction, donne le points a regarder pour la collision        
     if(fleche.x > 0){
         fleche.y = 0;
         
@@ -62,23 +62,13 @@ int collision_mur(PACMAN pacman, POINT fleche){
 
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
-    //renvoie 0,1,2ou3 si mur détecté et 4 si rien
-    if((c_pacman == 1) && (P.x == pacman.position.x + 20)){
+    //renvoie 0 ou 1 si mur détecté et 4 si rien
+    if((c_pacman == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
         go = 0;
     }
-    else{
-        if((c_pacman == 1) && (P.x == pacman.position.x - 20)){
-            go = 1;
-        }
-    }
     
-    if((c_pacman == 1) && (P.y == pacman.position.y + 20)){
-        go = 2;
-    }
-    else{
-        if((c_pacman == 1) && (P.y == pacman.position.y - 20)){
-            go = 3;
-        }
+    if((c_pacman == 1) && ((fleche.x<0) || (fleche.y<0)) ){
+        go = 1;
     }
     
     if(c_pacman == 3){
@@ -125,21 +115,13 @@ void avancer_le_jeu(){
     
     //empèche d'aller sur un mur 
     if(go == 0){
-        pacman.vitesse.x = f.x - 1;}
-    
-    
-    if(go == 1){
-        pacman.vitesse.x = f.x + 1;}
-        
-    
-    if(go == 2){
+        pacman.vitesse.x = f.x - 1;
         pacman.vitesse.y = f.y - 1;}
-    
-    
-    if(go == 3){
+        
+    if(go == 1){
+        pacman.vitesse.x = f.x + 1;
         pacman.vitesse.y = f.y + 1;}
     
-        
     if(go == 4){
         pacman.vitesse.x = f.x * VITESSE;
         pacman.vitesse.y = f.y * VITESSE;}
