@@ -27,25 +27,34 @@ void initialiser_partie()
 
 //fct° qui vérifie si pacman touche les murs
 int collision_mur(PACMAN pacman, POINT fleche){ 
-    int c_pacman, go = 4; 
+    int c_pacman = 3, go = 4; 
     
     POINT P;
 
+    //Suivant la direction, donne le points a regarder pour la collision
     if(fleche.x > 0){
-        P.x = pacman.position.x + 30;
+        fleche.y = 0;
+        
+        P.x = pacman.position.x + 20;
         P.y = pacman.position.y;}    
         
     if(fleche.x < 0){
-        P.x = pacman.position.x - 30;
+        fleche.y = 0;
+        
+        P.x = pacman.position.x - 20;
         P.y = pacman.position.y;}
     
     if(fleche.y > 0){
+        fleche.x = 0;
+        
         P.x = pacman.position.x ;
-        P.y = pacman.position.y + 30;}
+        P.y = pacman.position.y + 20;}
         
     if(fleche.y < 0){
+        fleche.x = 0;
+
         P.x = pacman.position.x ;
-        P.y = pacman.position.y - 30;}
+        P.y = pacman.position.y - 20;}
         
     if((fleche.x == 0) && (fleche.y == 0)){
         P.x = pacman.position.x;
@@ -53,20 +62,21 @@ int collision_mur(PACMAN pacman, POINT fleche){
 
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
-    if((c_pacman == 1) && (P.x == pacman.position.x + 30)){
+    //renvoie 0,1,2ou3 si mur détecté et 4 si rien
+    if((c_pacman == 1) && (P.x == pacman.position.x + 20)){
         go = 0;
     }
     else{
-        if((c_pacman == 1) && (P.x == pacman.position.x - 30)){
+        if((c_pacman == 1) && (P.x == pacman.position.x - 20)){
             go = 1;
         }
     }
     
-    if((c_pacman == 1) && (P.y == pacman.position.y + 30)){
+    if((c_pacman == 1) && (P.y == pacman.position.y + 20)){
         go = 2;
     }
     else{
-        if((c_pacman == 1) && (P.y == pacman.position.y - 30)){
+        if((c_pacman == 1) && (P.y == pacman.position.y - 20)){
             go = 3;
         }
     }
@@ -108,11 +118,12 @@ void dessiner_le_jeu(int frame){
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
     POINT f;
-    int go;
+    int go = 4;
     
     f = lire_fleches();
     go = collision_mur(pacman, f);
     
+    //empèche d'aller sur un mur 
     if(go == 0){
         pacman.vitesse.x = f.x - 1;}
     
@@ -134,7 +145,7 @@ void avancer_le_jeu(){
         pacman.vitesse.y = f.y * VITESSE;}
     
     
-    
+    //empèche le déplacement en X et en Y en même temps
     if((f.x > 0) || (f.x < 0)){
         pacman.vitesse.y = 0;
         
