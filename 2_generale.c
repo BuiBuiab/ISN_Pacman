@@ -27,31 +27,31 @@ void initialiser_partie()
 
 //fct° qui vérifie si pacman touche les murs
 int collision_mur(PACMAN pacman, POINT fleche){ 
-    int c_pacman = 3, go = 4; 
+    int c_pacman = 3, go = 2; 
     
     POINT P;
 
     //Suivant la direction, donne le points a regarder pour la collision        
-    if(fleche.x > 0){
-        fleche.y = 0;
+    if(fleche.x > 0){//test vers la droite
+        fleche.y = MVT_STOP;
         
         P.x = pacman.position.x + 20;
         P.y = pacman.position.y;}    
         
-    if(fleche.x < 0){
-        fleche.y = 0;
+    if(fleche.x < 0){//test vers la gauche
+        fleche.y = MVT_STOP;
         
         P.x = pacman.position.x - 20;
         P.y = pacman.position.y;}
     
-    if(fleche.y > 0){
-        fleche.x = 0;
+    if(fleche.y > 0){//test vers le haut
+        fleche.x = MVT_STOP;
         
         P.x = pacman.position.x ;
         P.y = pacman.position.y + 20;}
         
-    if(fleche.y < 0){
-        fleche.x = 0;
+    if(fleche.y < 0){//test vers le bas
+        fleche.x = MVT_STOP;
 
         P.x = pacman.position.x ;
         P.y = pacman.position.y - 20;}
@@ -62,20 +62,37 @@ int collision_mur(PACMAN pacman, POINT fleche){
 
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
+    //printf("c = : %d\n", c_pacman);
+    //fflush(stdout);
+    
     //renvoie 0 ou 1 si mur détecté et 4 si rien
     if((c_pacman == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
-        go = 0;
+        go = MVT_NEG_STOP;
     }
     
     if((c_pacman == 1) && ((fleche.x<0) || (fleche.y<0)) ){
-        go = 1;
+        go = MVT_POS_STOP;
     }
     
     if(c_pacman == 3){
-        go = 4;
+        go = MVT_OK;
     }
     
     return go;
+}
+
+//
+void teleporteur(PACMAN p, FANTOME f){
+    
+    if((p.position.x-20 == 898) || (f.position.x-20 == 900)){
+        p.position.x = -20;
+        //f.position.x = -20;
+    }
+    
+    if((p.position.x+20 == 0) || (f.position.x+20 == 0)){
+        p.position.x = 920;
+        //f.position.x = 920;
+    }
 }
 
 //fct° qui vérifie la collision entre pacman et les fantome
@@ -88,7 +105,6 @@ int collision_mur(PACMAN pacman, POINT fleche){
 void centrer(PACMAN p, FANTOME f){
     
 }
-
 
 //fct° qui vérifie les conditions de perte (renvoie 0 si le joueur à perdu)
 /*int continuer_a_jouer(){
@@ -108,35 +124,35 @@ void dessiner_le_jeu(int frame){
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
     POINT f;
-    int go = 4;
+    int go = 2;
     
     f = lire_fleches();
     go = collision_mur(pacman, f);
     
     //empèche d'aller sur un mur 
-    if(go == 0){
+    if(go == MVT_NEG_STOP){
         pacman.vitesse.x = f.x - 1;
         pacman.vitesse.y = f.y - 1;}
         
-    if(go == 1){
+    if(go == MVT_POS_STOP){
         pacman.vitesse.x = f.x + 1;
         pacman.vitesse.y = f.y + 1;}
     
-    if(go == 4){
+    if(go == MVT_OK){
         pacman.vitesse.x = f.x * VITESSE;
         pacman.vitesse.y = f.y * VITESSE;}
     
     
     //empèche le déplacement en X et en Y en même temps
     if((f.x > 0) || (f.x < 0)){
-        pacman.vitesse.y = 0;
+        pacman.vitesse.y = MVT_STOP;
         
         pacman.position.x += pacman.vitesse.x;
         pacman.position.y += pacman.vitesse.y;}
       
     
     if((f.y > 0) || (f.y < 0)){
-        pacman.vitesse.x = 0;
+        pacman.vitesse.x = MVT_STOP;
         
         pacman.position.x += pacman.vitesse.x;
         pacman.position.y += pacman.vitesse.y;}

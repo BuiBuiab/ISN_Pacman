@@ -4,6 +4,11 @@
 #define HAUTEUR 1000             // Dimensions la photo map.png
 #define LARGEUR 900
 #define VITESSE 5               // Vitesse de déplacement
+#define MVT_STOP 0
+#define MVT_POS_STOP 0
+#define MVT_NEG_STOP 1
+#define MVT_OK 2
+
 
 #include "6_definition.c"
 
@@ -42,9 +47,7 @@ int main( int argc, char** argv )
         if(frame==20){
             frame = 0;}
             
-        //collision_mur(pacman);
         avancer_le_jeu();               // 2. On fait avancer la partie
-        
         //jouer = continuer_a_jouer();    // 3. On teste si le joueur a perdu        
         attendre(30);                   // 4. Un pause pour que le jeu n'aille pas trop vite
     }   
