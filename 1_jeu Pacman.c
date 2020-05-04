@@ -4,9 +4,8 @@
 #define HAUTEUR 1000             // Dimensions la photo map.png
 #define LARGEUR 900
 #define VITESSE 5               // Vitesse de déplacement
+#define MVT_NEG_STOP 1 //= stopper le mouvement si "x" ou "y" = 0
 #define MVT_STOP 0
-#define MVT_POS_STOP 0
-#define MVT_NEG_STOP 1
 #define MVT_OK 2
 
 

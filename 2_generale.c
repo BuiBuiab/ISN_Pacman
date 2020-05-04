@@ -62,16 +62,21 @@ int collision_mur(PACMAN pacman, POINT fleche){
 
     c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
-    printf("c = : %d\n", c_pacman);
-    fflush(stdout);
+    //printf("c = : %d\n", c_pacman);
+    //fflush(stdout);
     
-    //renvoie 0 ou 1 si mur détecté et 4 si rien
+    
+    /*renvoie: * 0 si "x" ou "y" > 0
+               * 1 si "x" ou "y" < 0
+               * 2 si pacman veut passer dans le téléporteur (et les fantômes plus tard)
+    */
+               
     if((c_pacman == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
         go = MVT_NEG_STOP;
     }
     
     if((c_pacman == 1) && ((fleche.x<0) || (fleche.y<0)) ){
-        go = MVT_POS_STOP;
+        go = MVT_STOP;
     }
     
     if((c_pacman == 3) || (c_pacman == 4)){
@@ -90,7 +95,7 @@ int collision_mur(PACMAN pacman, POINT fleche){
 /*int collision(PACMAN pacman, FANTOME fantome){
     
     
-}*/
+}
 
 //fct qui centre pacman et les fantômes au millieu des couloirs 
 void centrer(PACMAN p, FANTOME f){
@@ -98,7 +103,7 @@ void centrer(PACMAN p, FANTOME f){
 }
 
 //fct° qui vérifie les conditions de perte (renvoie 0 si le joueur à perdu)
-/*int continuer_a_jouer(){
+int continuer_a_jouer(){
 
 }*/
 
@@ -125,7 +130,7 @@ void avancer_le_jeu(){
         pacman.vitesse.x = f.x - 1;
         pacman.vitesse.y = f.y - 1;}
         
-    if(go == MVT_POS_STOP){
+    if(go == MVT_STOP){
         pacman.vitesse.x = f.x + 1;
         pacman.vitesse.y = f.y + 1;}
     
