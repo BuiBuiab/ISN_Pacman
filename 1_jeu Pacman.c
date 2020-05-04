@@ -46,8 +46,9 @@ int main( int argc, char** argv )
         
         if(frame==20){
             frame = 0;}
-            
+        
         avancer_le_jeu();               // 2. On fait avancer la partie
+        
         //jouer = continuer_a_jouer();    // 3. On teste si le joueur a perdu        
         attendre(30);                   // 4. Un pause pour que le jeu n'aille pas trop vite
     }   

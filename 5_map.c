@@ -3,8 +3,7 @@ void dessiner_map(){
     
     p.x = LARGEUR/2;
     p.y = HAUTEUR/2;
-    
-    dessiner_image(img_map_collision, p);
+    dessiner_image(img_map, p);
 }
 
 //renvoie 1 ou 2 en fonction de la couleur du pixel sur la map_collisions
