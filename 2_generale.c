@@ -9,6 +9,7 @@
     return sqrt(dx*dx+dy*dy);
 }*/
 
+
 void initialiser_partie()
 {
     initialiser_fenetre( LARGEUR, HAUTEUR, "Pacman" ); 
@@ -22,12 +23,30 @@ void initialiser_partie()
     img_pacman[1] = charger_image("Pacman_bouche_fermee.png");
     
     fantome = creer_fantome();
-    img_fantome = charger_image("F bleu look B.png");
+    img_fantome_haut[0] = charger_image("F bleu look T.png");
+    img_fantome_bas[0] = charger_image("F bleu look B.png");
+    img_fantome_dte[0] = charger_image("F bleu look R.png");
+    img_fantome_gche[0] = charger_image("F bleu look L.png");
+    
+    img_fantome_haut[1] = charger_image("F orange look T.png");
+    img_fantome_bas[1] = charger_image("F orange look B.png");
+    img_fantome_dte[1] = charger_image("F orange look R.png");
+    img_fantome_gche[1] = charger_image("F orange look L.png");
+    
+    img_fantome_haut[2] = charger_image("F rose look T.png");
+    img_fantome_bas[2] = charger_image("F rose look B.png");
+    img_fantome_dte[2] = charger_image("F rose look R.png");
+    img_fantome_gche[2] = charger_image("F rose look L.png");
+    
+    img_fantome_haut[3] = charger_image("F rouge look T.png");
+    img_fantome_bas[3] = charger_image("F rouge look B.png");
+    img_fantome_dte[3] = charger_image("F rouge look R.png");
+    img_fantome_gche[3] = charger_image("F rouge look L.png");
 }
 
 //fct° qui vérifie si pacman touche les murs
-int collision_mur(PACMAN pacman, POINT fleche){ 
-    int c_pacman = 3, go = 2; 
+int collision_mur(POINT centre_objet, POINT fleche){ 
+    int c_objet = 3, go = 2; 
     
     POINT P;
 
@@ -35,32 +54,32 @@ int collision_mur(PACMAN pacman, POINT fleche){
     if(fleche.x > 0){//test vers la droite
         fleche.y = MVT_STOP;
         
-        P.x = pacman.position.x + 20;
-        P.y = pacman.position.y;}    
+        P.x = centre_objet.x + 20;
+        P.y = centre_objet.y;}    
         
     if(fleche.x < 0){//test vers la gauche
         fleche.y = MVT_STOP;
         
-        P.x = pacman.position.x - 20;
-        P.y = pacman.position.y;}
+        P.x = centre_objet.x - 20;
+        P.y = centre_objet.y;}
     
     if(fleche.y > 0){//test vers le haut
         fleche.x = MVT_STOP;
         
-        P.x = pacman.position.x ;
-        P.y = pacman.position.y + 20;}
+        P.x = centre_objet.x ;
+        P.y = centre_objet.y + 20;}
         
     if(fleche.y < 0){//test vers le bas
         fleche.x = MVT_STOP;
 
-        P.x = pacman.position.x ;
-        P.y = pacman.position.y - 20;}
+        P.x = centre_objet.x ;
+        P.y = centre_objet.y - 20;}
         
     if((fleche.x == 0) && (fleche.y == 0)){
-        P.x = pacman.position.x;
-        P.y = pacman.position.y;}
+        P.x = centre_objet.x;
+        P.y = centre_objet.y;}
 
-    c_pacman = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
+    c_objet = couleur_map(P); //1 = rouge, 2 = jaune, 3 = bleu
     
     //printf("c = : %d\n", c_pacman);
     //fflush(stdout);
@@ -68,22 +87,20 @@ int collision_mur(PACMAN pacman, POINT fleche){
     
     /*renvoie: * 0 si "x" ou "y" > 0
                * 1 si "x" ou "y" < 0
-               * 2 si pacman veut passer dans le téléporteur (et les fantômes plus tard)
-    */
-               
-    if((c_pacman == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
+               * 2 si pacman veut passer dans le téléporteur (et les fantômes plus tard)*/
+    if((c_objet == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
         go = MVT_NEG_STOP;
     }
     
-    if((c_pacman == 1) && ((fleche.x<0) || (fleche.y<0)) ){
+    if((c_objet == 1) && ((fleche.x<0) || (fleche.y<0)) ){
         go = MVT_STOP;
     }
     
-    if((c_pacman == 3) || (c_pacman == 4)){
+    if((c_objet == 3) || (c_objet == 4)){
         go = MVT_OK;
     }
     
-    if( ((c_pacman == 1) && (pacman.position.x >= 880)) || ((c_pacman == 1) && (pacman.position.x <= 20)) ){
+    if( ((c_objet == 1) && (centre_objet.x >= 880)) || ((c_objet == 1) && (centre_objet.x <= 20)) ){
         go = MVT_OK;
     }
     
@@ -112,29 +129,33 @@ void dessiner_le_jeu(int frame){
     
     dessiner_map();    
     dessiner_pacman(pacman, frame);
-    dessiner_fantome(fantome);
-        
+    
+    POINT f = lire_fleches();
+    dessiner_fantome(fantome, f);
+    
+    
     affiche_tout();
 }
 
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
     POINT f;
-    int go = 2;
+    int go_pacman = 2, go_fantome;
     
     f = lire_fleches();
-    go = collision_mur(pacman, f);
+    go_pacman = collision_mur(pacman.position, f);
     
+    /********************déplacement pacman********************/
     //empèche d'aller sur un mur 
-    if(go == MVT_NEG_STOP){
+    /*if(go_pacman == MVT_NEG_STOP){
         pacman.vitesse.x = f.x - 1;
         pacman.vitesse.y = f.y - 1;}
         
-    if(go == MVT_STOP){
+    if(go_pacman == MVT_STOP){
         pacman.vitesse.x = f.x + 1;
         pacman.vitesse.y = f.y + 1;}
     
-    if(go == MVT_OK){
+    if(go_pacman == MVT_OK){
         pacman.vitesse.x = f.x * VITESSE;
         pacman.vitesse.y = f.y * VITESSE;}
     
@@ -151,12 +172,51 @@ void avancer_le_jeu(){
         pacman.vitesse.x = MVT_STOP;
         
         pacman.position.x += pacman.vitesse.x;
-        pacman.position.y += pacman.vitesse.y;}
+        pacman.position.y += pacman.vitesse.y;}   */
         
     //printf("X = %d\n\n", pacman.position.x);
     //fflush(stdout);
 
-    //téléporteur 
+    
+    
+    
+    /********************déplacement fantômes********************/
+    //fantome = deplacer_fantome(fantome);
+    
+    
+    
+    go_fantome = collision_mur(fantome.position, f);
+    
+    if(go_fantome == MVT_NEG_STOP){
+        fantome.vitesse.x =  MVT_STOP;
+        fantome.vitesse.y =  MVT_STOP;}
+        
+    if(go_fantome == MVT_STOP){
+        fantome.vitesse.x =  MVT_STOP;
+        fantome.vitesse.y =  MVT_STOP;}
+    
+    /*****pour tester le déplacement avec les flèches*****/
+    if(go_fantome == MVT_OK){
+        fantome.vitesse.x = f.x * VITESSE;
+        fantome.vitesse.y = f.y * VITESSE;}
+    
+    
+    //empèche le déplacement en X et en Y en même temps
+    if((f.x > 0) || (f.x < 0)){
+        fantome.vitesse.y = MVT_STOP;
+        
+        fantome.position.x += fantome.vitesse.x;
+        fantome.position.y += fantome.vitesse.y;}
+      
+    
+    if((f.y > 0) || (f.y < 0)){
+        fantome.vitesse.x = MVT_STOP;
+        
+        fantome.position.x += fantome.vitesse.x;
+        fantome.position.y += fantome.vitesse.y;}
+        
+    
+    /**********téléporteur**********/
     if((pacman.position.x > 920) || (fantome.position.x > 920)){
         pacman.position.x = -20;
         
@@ -167,10 +227,7 @@ void avancer_le_jeu(){
         pacman.position.x = 920;
         
         fantome.position.x = 920;}
-    
-    
-    
-    
-    //fantome = deplacer_fantome(fantome);
 }
+
+
 

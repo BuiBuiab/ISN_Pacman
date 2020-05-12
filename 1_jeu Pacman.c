@@ -4,7 +4,7 @@
 #define HAUTEUR 1000             // Dimensions la photo map.png
 #define LARGEUR 900
 #define VITESSE 5               // Vitesse de déplacement
-#define MVT_NEG_STOP 1 //= stopper le mouvement si "x" ou "y" = 0
+#define MVT_NEG_STOP 1 //= stopper le mouvement si "x" ou "y" < 0
 #define MVT_STOP 0
 #define MVT_OK 2
 
@@ -18,7 +18,11 @@ IMAGE img_map;
 IMAGE img_map_collision;
 
 FANTOME fantome;
-IMAGE img_fantome;
+IMAGE img_fantome_haut[4];
+IMAGE img_fantome_bas[4];
+IMAGE img_fantome_dte[4];
+IMAGE img_fantome_gche[4];
+
 
 #include "5_map.c"
 #include "4_Fantomes.c"
