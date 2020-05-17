@@ -4,10 +4,15 @@
 #define HAUTEUR 1000             // Dimensions la photo map.png
 #define LARGEUR 900
 #define VITESSE 5               // Vitesse de déplacement
+
 #define MVT_NEG_STOP 1 //= stopper le mouvement si "x" ou "y" < 0
 #define MVT_STOP 0
 #define MVT_OK 2
 
+#define HAUT 0
+#define BAS 1
+#define DROITE 2
+#define GAUCHE 3
 
 #include "6_definition.c"
 
@@ -17,11 +22,13 @@ IMAGE img_pacman[2];
 IMAGE img_map;
 IMAGE img_map_collision;
 
+FANTOME fantome_bleu;
+FANTOME fantome_orange;
+FANTOME fantome_rose;
+FANTOME fantome_r;
+FANTOME fantome_rouge;
 FANTOME fantome;
-IMAGE img_fantome_haut[4];
-IMAGE img_fantome_bas[4];
-IMAGE img_fantome_dte[4];
-IMAGE img_fantome_gche[4];
+IMAGE img_fantome[4][4];
 
 
 #include "5_map.c"

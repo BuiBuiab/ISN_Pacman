@@ -22,26 +22,29 @@ void initialiser_partie()
     img_pacman[0] = charger_image("pacman.png");
     img_pacman[1] = charger_image("Pacman_bouche_fermee.png");
     
-    fantome = creer_fantome();
-    img_fantome_haut[0] = charger_image("F bleu look T.png");
-    img_fantome_bas[0] = charger_image("F bleu look B.png");
-    img_fantome_dte[0] = charger_image("F bleu look R.png");
-    img_fantome_gche[0] = charger_image("F bleu look L.png");
+    fantome_bleu = creer_fantome();
+    img_fantome[0][HAUT] = charger_image("F bleu look T.png");
+    img_fantome[0][BAS] = charger_image("F bleu look B.png");
+    img_fantome[0][DROITE] = charger_image("F bleu look R.png");
+    img_fantome[0][GAUCHE] = charger_image("F bleu look L.png");
     
-    img_fantome_haut[1] = charger_image("F orange look T.png");
-    img_fantome_bas[1] = charger_image("F orange look B.png");
-    img_fantome_dte[1] = charger_image("F orange look R.png");
-    img_fantome_gche[1] = charger_image("F orange look L.png");
+    fantome_orange = creer_fantome();
+    img_fantome[1][HAUT] = charger_image("F orange look T.png");
+    img_fantome[1][BAS] = charger_image("F orange look B.png");
+    img_fantome[1][DROITE] = charger_image("F orange look R.png");
+    img_fantome[1][GAUCHE] = charger_image("F orange look L.png");
     
-    img_fantome_haut[2] = charger_image("F rose look T.png");
-    img_fantome_bas[2] = charger_image("F rose look B.png");
-    img_fantome_dte[2] = charger_image("F rose look R.png");
-    img_fantome_gche[2] = charger_image("F rose look L.png");
+    fantome_rose = creer_fantome();
+    img_fantome[2][HAUT] = charger_image("F rose look T.png");
+    img_fantome[2][BAS] = charger_image("F rose look B.png");
+    img_fantome[2][DROITE] = charger_image("F rose look R.png");
+    img_fantome[2][GAUCHE] = charger_image("F rose look L.png");
     
-    img_fantome_haut[3] = charger_image("F rouge look T.png");
-    img_fantome_bas[3] = charger_image("F rouge look B.png");
-    img_fantome_dte[3] = charger_image("F rouge look R.png");
-    img_fantome_gche[3] = charger_image("F rouge look L.png");
+    fantome_rouge = creer_fantome();
+    img_fantome[3][HAUT] = charger_image("F rouge look T.png");
+    img_fantome[3][BAS] = charger_image("F rouge look B.png");
+    img_fantome[3][DROITE] = charger_image("F rouge look R.png");
+    img_fantome[3][GAUCHE] = charger_image("F rouge look L.png");
 }
 
 //fct° qui vérifie si pacman touche les murs
@@ -131,8 +134,7 @@ void dessiner_le_jeu(int frame){
     dessiner_pacman(pacman, frame);
     
     POINT f = lire_fleches();
-    dessiner_fantome(fantome, f);
-    
+    dessiner_fantome(f);
     
     affiche_tout();
 }
@@ -184,49 +186,48 @@ void avancer_le_jeu(){
     //fantome = deplacer_fantome(fantome);
     
     
-    
-    go_fantome = collision_mur(fantome.position, f);
+    go_fantome = collision_mur(fantome_bleu.position, f);
     
     if(go_fantome == MVT_NEG_STOP){
-        fantome.vitesse.x =  MVT_STOP;
-        fantome.vitesse.y =  MVT_STOP;}
+        fantome_bleu.vitesse.x =  MVT_STOP;
+        fantome_bleu.vitesse.y =  MVT_STOP;}
         
     if(go_fantome == MVT_STOP){
-        fantome.vitesse.x =  MVT_STOP;
-        fantome.vitesse.y =  MVT_STOP;}
+        fantome_bleu.vitesse.x =  MVT_STOP;
+        fantome_bleu.vitesse.y =  MVT_STOP;}
     
     /*****pour tester le déplacement avec les flèches*****/
     if(go_fantome == MVT_OK){
-        fantome.vitesse.x = f.x * VITESSE;
-        fantome.vitesse.y = f.y * VITESSE;}
+        fantome_bleu.vitesse.x = f.x * VITESSE;
+        fantome_bleu.vitesse.y = f.y * VITESSE;}
     
     
     //empèche le déplacement en X et en Y en même temps
     if((f.x > 0) || (f.x < 0)){
-        fantome.vitesse.y = MVT_STOP;
+        fantome_bleu.vitesse.y = MVT_STOP;
         
-        fantome.position.x += fantome.vitesse.x;
-        fantome.position.y += fantome.vitesse.y;}
+        fantome_bleu.position.x += fantome_bleu.vitesse.x;
+        fantome_bleu.position.y += fantome_bleu.vitesse.y;}
       
     
     if((f.y > 0) || (f.y < 0)){
-        fantome.vitesse.x = MVT_STOP;
+        fantome_bleu.vitesse.x = MVT_STOP;
         
-        fantome.position.x += fantome.vitesse.x;
-        fantome.position.y += fantome.vitesse.y;}
+        fantome_bleu.position.x += fantome_bleu.vitesse.x;
+        fantome_bleu.position.y += fantome_bleu.vitesse.y;}
         
     
     /**********téléporteur**********/
-    if((pacman.position.x > 920) || (fantome.position.x > 920)){
+    if((pacman.position.x > 920) || (fantome_bleu.position.x > 920)){
         pacman.position.x = -20;
         
-        fantome.position.x = -20;}
+        fantome_bleu.position.x = -20;}
     
     
-    if((pacman.position.x < -20) || (fantome.position.x < -20)){
+    if((pacman.position.x < -20) || (fantome_bleu.position.x < -20)){
         pacman.position.x = 920;
         
-        fantome.position.x = 920;}
+        fantome_bleu.position.x = 920;}
 }
 
 

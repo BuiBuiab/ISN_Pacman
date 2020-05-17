@@ -1,50 +1,86 @@
 //fct° qui dessine les Fantômes
-void regard_fantome(FANTOME f){
-    
-    /*f.position.x = 380;
-    f.position.y = HAUTEUR/2 + 55;
-    dessiner_image(img_fantome_bas[0], f.position);
-    
-    f.position.x = 428;
-    f.position.y = HAUTEUR/2 + 55;
-    dessiner_image(img_fantome_bas[1], f.position);
-    
-    f.position.x = 476;
-    f.position.y = HAUTEUR/2 + 55;
-    dessiner_image(img_fantome_bas[2], f.position);
-    
-    f.position.x = 524;
-    f.position.y = HAUTEUR/2 + 55;*/
-    //dessiner_image(img_fantome_bas[3], f.position);  
-}
-
-void dessiner_fantome(FANTOME f, POINT p){
+void dessiner_fantome(POINT p){
 
     if(p.x>0){
-        dessiner_image(img_fantome_dte[3], f.position);}
+        dessiner_image(img_fantome[0][DROITE], fantome_bleu.position);
+        dessiner_image(img_fantome[1][DROITE], fantome_orange.position);
+        dessiner_image(img_fantome[2][DROITE], fantome_rose.position);
+        dessiner_image(img_fantome[3][DROITE], fantome_rouge.position);
+    }
         
     if(p.x<0){
-        dessiner_image(img_fantome_gche[3], f.position);}
+        dessiner_image(img_fantome[0][GAUCHE], fantome_bleu.position);
+        dessiner_image(img_fantome[1][GAUCHE], fantome_orange.position);
+        dessiner_image(img_fantome[2][GAUCHE], fantome_rose.position);
+        dessiner_image(img_fantome[3][GAUCHE], fantome_rouge.position);
+    }
         
     if(p.y>0){
-        dessiner_image(img_fantome_haut[3], f.position);}
+        dessiner_image(img_fantome[0][HAUT], fantome_bleu.position);
+        dessiner_image(img_fantome[1][HAUT], fantome_orange.position);
+        dessiner_image(img_fantome[2][HAUT], fantome_rose.position);
+        dessiner_image(img_fantome[3][HAUT], fantome_rouge.position);
+    }
         
     if(p.y<0){
-        dessiner_image(img_fantome_bas[3], f.position);}
+        dessiner_image(img_fantome[0][BAS], fantome_bleu.position);
+        dessiner_image(img_fantome[1][BAS], fantome_orange.position);
+        dessiner_image(img_fantome[2][BAS], fantome_rose.position);
+        dessiner_image(img_fantome[3][BAS], fantome_rouge.position);
+    
+    }
     
     if((p.x==0) && (p.y==0)){
-        dessiner_image(img_fantome_bas[3], f.position);}
+        dessiner_image(img_fantome[0][BAS], fantome_bleu.position);
+        dessiner_image(img_fantome[1][BAS], fantome_orange.position);
+        dessiner_image(img_fantome[2][BAS], fantome_rose.position);
+        dessiner_image(img_fantome[3][BAS], fantome_rouge.position);
+    }
     
 }
 
 //fct° quicréer les 1ers Fantômes dans leur pts de spawn
 FANTOME creer_fantome(){
-     FANTOME f;
-     
-     f.position.x = LARGEUR/2;
-     f.position.y = HAUTEUR/2 + 55;
+    FANTOME coord_f;
     
-    return f;
+    int tps = 0;
+    
+    while(tps < 4){
+        fantome_bleu.position.x = 380;
+        fantome_bleu.position.y = HAUTEUR/2 + 55;
+        
+        fantome_orange.position.x = 428;
+        fantome_orange.position.y = HAUTEUR/2 + 55;
+    
+        fantome_rose.position.x = 476;
+        fantome_rose.position.y = HAUTEUR/2 + 55;
+ 
+        fantome_rouge.position.x = 524;
+        fantome_rouge.position.y = HAUTEUR/2 + 55;
+        
+        tps++;
+        
+        if(tps == 0){
+            coord_f.position.x = fantome_bleu.position.x;
+            coord_f.position.y = fantome_bleu.position.y;}
+        
+        if(tps == 1){
+            coord_f.position.x = fantome_orange.position.x;
+            coord_f.position.y = fantome_orange.position.y;}
+        
+        if(tps == 2){
+            coord_f.position.x = fantome_rose.position.x;
+            coord_f.position.y = fantome_rose.position.y;}
+            
+        
+        if(tps == 3){
+            coord_f.position.x = fantome_rouge.position.x;
+            coord_f.position.y = fantome_rouge.position.y;}
+        
+    }
+    
+    
+    return coord_f;
 }
     
 
