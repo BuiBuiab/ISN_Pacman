@@ -1,4 +1,18 @@
 //fct° qui dessine les Fantômes
+<<<<<<< HEAD
+void dessiner_fantome(POINT p, int x, FANTOME fantome){
+    
+    if(p.x>0)
+        dessiner_image(img_fantome[x][DROITE], fantome.position);
+    
+        
+    if(p.x<0)
+        dessiner_image(img_fantome[x][GAUCHE], fantome.position);
+    
+        
+    if(p.y>0)
+        dessiner_image(img_fantome[x][HAUT], fantome.position);
+=======
 void dessiner_fantome(POINT p,int x, FANTOME fantome[4]){
 
     if(p.x>0){
@@ -15,12 +29,21 @@ void dessiner_fantome(POINT p,int x, FANTOME fantome[4]){
         
     if(p.y<0){
         dessiner_image(img_fantome[x][BAS], fantome[x].position);
+>>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
     
-    }
+        
+    if(p.y<0)
+        dessiner_image(img_fantome[x][BAS], fantome.position);
+
     
+<<<<<<< HEAD
+    if((p.x==0) && (p.y==0))
+        dessiner_image(img_fantome[x][BAS], fantome.position);
+=======
     if((p.x==0) && (p.y==0)){
         dessiner_image(img_fantome[x][BAS], fantome[x].position);
     }
+>>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
     
 }
 
@@ -59,11 +82,15 @@ FANTOME creer_fantome(){
             
         
         if(tps == 3){
+<<<<<<< HEAD
+            coord_f.position.x = fantome_rouge.position.x;
+            coord_f.position.y = fantome_rouge.position.y;}
+
+=======
             coord_f.position.x = fantome[3].position.x;
             coord_f.position.y = fantome[3].position.y;}
+>>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
     }
-    
-    
     return coord_f;
 }
     

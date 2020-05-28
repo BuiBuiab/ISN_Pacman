@@ -90,7 +90,7 @@ int collision_mur(POINT centre_objet, POINT fleche){
     
     /*renvoie: * 0 si "x" ou "y" > 0
                * 1 si "x" ou "y" < 0
-               * 2 si pacman veut passer dans le téléporteur (et les fantômes plus tard)*/
+               * 2 = pacman ou les fantômes peuvent avancer*/
     if((c_objet == 1) && ((fleche.x > 0) || (fleche.y>0)) ){
         go = MVT_NEG_STOP;
     }
@@ -134,12 +134,20 @@ void dessiner_le_jeu(int frame){
     dessiner_pacman(pacman, frame);
     
     POINT f = lire_fleches();
+<<<<<<< HEAD
+    
+    dessiner_fantome(f, 0, fantome_bleu);
+    dessiner_fantome(f, 1, fantome_orange);
+    dessiner_fantome(f, 2, fantome_rose);
+    dessiner_fantome(f, 3, fantome_rouge);
+=======
     //int i;
     FANTOME fantome[4];
     
     
     dessiner_fantome(f, 0, fantome[0]);
     
+>>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
     
     affiche_tout();
 }

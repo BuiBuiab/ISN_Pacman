@@ -26,8 +26,11 @@ FANTOME fantome_bleu;
 FANTOME fantome_orange;
 FANTOME fantome_rose;
 FANTOME fantome_rouge;
+<<<<<<< HEAD
+=======
 FANTOME fantome[4];
 //FANTOME fantome;
+>>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
 IMAGE img_fantome[4][4];
 
 
