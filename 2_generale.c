@@ -22,25 +22,25 @@ void initialiser_partie()
     img_pacman[0] = charger_image("pacman.png");
     img_pacman[1] = charger_image("Pacman_bouche_fermee.png");
     
-    fantome[0] = creer_fantome();
+    fantome_bleu = creer_fantome();
     img_fantome[0][HAUT] = charger_image("F bleu look T.png");
     img_fantome[0][BAS] = charger_image("F bleu look B.png");
     img_fantome[0][DROITE] = charger_image("F bleu look R.png");
     img_fantome[0][GAUCHE] = charger_image("F bleu look L.png");
     
-    fantome[1] = creer_fantome();
+    fantome_orange = creer_fantome();
     img_fantome[1][HAUT] = charger_image("F orange look T.png");
     img_fantome[1][BAS] = charger_image("F orange look B.png");
     img_fantome[1][DROITE] = charger_image("F orange look R.png");
     img_fantome[1][GAUCHE] = charger_image("F orange look L.png");
     
-    fantome[2] = creer_fantome();
+    fantome_rose = creer_fantome();
     img_fantome[2][HAUT] = charger_image("F rose look T.png");
     img_fantome[2][BAS] = charger_image("F rose look B.png");
     img_fantome[2][DROITE] = charger_image("F rose look R.png");
     img_fantome[2][GAUCHE] = charger_image("F rose look L.png");
     
-    fantome[3] = creer_fantome();
+    fantome_rouge = creer_fantome();
     img_fantome[3][HAUT] = charger_image("F rouge look T.png");
     img_fantome[3][BAS] = charger_image("F rouge look B.png");
     img_fantome[3][DROITE] = charger_image("F rouge look R.png");
@@ -134,20 +134,11 @@ void dessiner_le_jeu(int frame){
     dessiner_pacman(pacman, frame);
     
     POINT f = lire_fleches();
-<<<<<<< HEAD
     
     dessiner_fantome(f, 0, fantome_bleu);
     dessiner_fantome(f, 1, fantome_orange);
     dessiner_fantome(f, 2, fantome_rose);
     dessiner_fantome(f, 3, fantome_rouge);
-=======
-    //int i;
-    FANTOME fantome[4];
-    
-    
-    dessiner_fantome(f, 0, fantome[0]);
-    
->>>>>>> parent of 7c06eb0... Revert "travil sur les fantômes"
     
     affiche_tout();
 }
