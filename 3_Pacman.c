@@ -11,10 +11,16 @@ PACMAN creer_pacman(){
     PACMAN p;
     
     p.position.x = LARGEUR/2;
-    p.position.y = HAUTEUR/2-35;
+    p.position.y = HAUTEUR/2+35;
     
     return p;
 }
+
+/*void bonus(){
+    
+}*/
+
+
 
 
 

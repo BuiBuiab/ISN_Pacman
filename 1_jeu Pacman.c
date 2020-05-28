@@ -25,9 +25,9 @@ IMAGE img_map_collision;
 FANTOME fantome_bleu;
 FANTOME fantome_orange;
 FANTOME fantome_rose;
-FANTOME fantome_r;
 FANTOME fantome_rouge;
-FANTOME fantome;
+FANTOME fantome[4];
+//FANTOME fantome;
 IMAGE img_fantome[4][4];
 
 

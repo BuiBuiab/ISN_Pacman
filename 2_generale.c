@@ -16,31 +16,31 @@ void initialiser_partie()
     affiche_auto_off();
     
     img_map = charger_image("map.png");
-    img_map_collision = charger_image("map_collisions.png");
+    img_map_collision = charger_image("map_collision.png");
     
     pacman = creer_pacman();
     img_pacman[0] = charger_image("pacman.png");
     img_pacman[1] = charger_image("Pacman_bouche_fermee.png");
     
-    fantome_bleu = creer_fantome();
+    fantome[0] = creer_fantome();
     img_fantome[0][HAUT] = charger_image("F bleu look T.png");
     img_fantome[0][BAS] = charger_image("F bleu look B.png");
     img_fantome[0][DROITE] = charger_image("F bleu look R.png");
     img_fantome[0][GAUCHE] = charger_image("F bleu look L.png");
     
-    fantome_orange = creer_fantome();
+    fantome[1] = creer_fantome();
     img_fantome[1][HAUT] = charger_image("F orange look T.png");
     img_fantome[1][BAS] = charger_image("F orange look B.png");
     img_fantome[1][DROITE] = charger_image("F orange look R.png");
     img_fantome[1][GAUCHE] = charger_image("F orange look L.png");
     
-    fantome_rose = creer_fantome();
+    fantome[2] = creer_fantome();
     img_fantome[2][HAUT] = charger_image("F rose look T.png");
     img_fantome[2][BAS] = charger_image("F rose look B.png");
     img_fantome[2][DROITE] = charger_image("F rose look R.png");
     img_fantome[2][GAUCHE] = charger_image("F rose look L.png");
     
-    fantome_rouge = creer_fantome();
+    fantome[3] = creer_fantome();
     img_fantome[3][HAUT] = charger_image("F rouge look T.png");
     img_fantome[3][BAS] = charger_image("F rouge look B.png");
     img_fantome[3][DROITE] = charger_image("F rouge look R.png");
@@ -134,7 +134,12 @@ void dessiner_le_jeu(int frame){
     dessiner_pacman(pacman, frame);
     
     POINT f = lire_fleches();
-    dessiner_fantome(f);
+    //int i;
+    FANTOME fantome[4];
+    
+    
+    dessiner_fantome(f, 0, fantome[0]);
+    
     
     affiche_tout();
 }
@@ -142,10 +147,11 @@ void dessiner_le_jeu(int frame){
 //Cette fonction s'occupe de deplacer pacman (action de joueur) et les fantômes
 void avancer_le_jeu(){
     POINT f;
-    int go_pacman = 2, go_fantome;
+    //int go_pacman = 2;
+    int go_fantome;
     
     f = lire_fleches();
-    go_pacman = collision_mur(pacman.position, f);
+    //go_pacman = collision_mur(pacman.position, f);
     
     /********************déplacement pacman********************/
     //empèche d'aller sur un mur 

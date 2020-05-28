@@ -1,40 +1,25 @@
 //fct° qui dessine les Fantômes
-void dessiner_fantome(POINT p){
+void dessiner_fantome(POINT p,int x, FANTOME fantome[4]){
 
     if(p.x>0){
-        dessiner_image(img_fantome[0][DROITE], fantome_bleu.position);
-        dessiner_image(img_fantome[1][DROITE], fantome_orange.position);
-        dessiner_image(img_fantome[2][DROITE], fantome_rose.position);
-        dessiner_image(img_fantome[3][DROITE], fantome_rouge.position);
+        dessiner_image(img_fantome[x][DROITE], fantome[x].position);
     }
         
     if(p.x<0){
-        dessiner_image(img_fantome[0][GAUCHE], fantome_bleu.position);
-        dessiner_image(img_fantome[1][GAUCHE], fantome_orange.position);
-        dessiner_image(img_fantome[2][GAUCHE], fantome_rose.position);
-        dessiner_image(img_fantome[3][GAUCHE], fantome_rouge.position);
+        dessiner_image(img_fantome[x][GAUCHE], fantome[x].position);
     }
         
     if(p.y>0){
-        dessiner_image(img_fantome[0][HAUT], fantome_bleu.position);
-        dessiner_image(img_fantome[1][HAUT], fantome_orange.position);
-        dessiner_image(img_fantome[2][HAUT], fantome_rose.position);
-        dessiner_image(img_fantome[3][HAUT], fantome_rouge.position);
+        dessiner_image(img_fantome[x][HAUT], fantome[x].position);
     }
         
     if(p.y<0){
-        dessiner_image(img_fantome[0][BAS], fantome_bleu.position);
-        dessiner_image(img_fantome[1][BAS], fantome_orange.position);
-        dessiner_image(img_fantome[2][BAS], fantome_rose.position);
-        dessiner_image(img_fantome[3][BAS], fantome_rouge.position);
+        dessiner_image(img_fantome[x][BAS], fantome[x].position);
     
     }
     
     if((p.x==0) && (p.y==0)){
-        dessiner_image(img_fantome[0][BAS], fantome_bleu.position);
-        dessiner_image(img_fantome[1][BAS], fantome_orange.position);
-        dessiner_image(img_fantome[2][BAS], fantome_rose.position);
-        dessiner_image(img_fantome[3][BAS], fantome_rouge.position);
+        dessiner_image(img_fantome[x][BAS], fantome[x].position);
     }
     
 }
@@ -46,37 +31,36 @@ FANTOME creer_fantome(){
     int tps = 0;
     
     while(tps < 4){
-        fantome_bleu.position.x = 380;
-        fantome_bleu.position.y = HAUTEUR/2 + 55;
+        fantome[0].position.x = 380;
+        fantome[0].position.y = HAUTEUR/2 + 55;
         
-        fantome_orange.position.x = 428;
-        fantome_orange.position.y = HAUTEUR/2 + 55;
+        fantome[1].position.x = 428;
+        fantome[1].position.y = HAUTEUR/2 + 55;
     
-        fantome_rose.position.x = 476;
-        fantome_rose.position.y = HAUTEUR/2 + 55;
+        fantome[2].position.x = 476;
+        fantome[2].position.y = HAUTEUR/2 + 55;
  
-        fantome_rouge.position.x = 524;
-        fantome_rouge.position.y = HAUTEUR/2 + 55;
+        fantome[3].position.x = 524;
+        fantome[3].position.y = HAUTEUR/2 + 55;
         
         tps++;
         
         if(tps == 0){
-            coord_f.position.x = fantome_bleu.position.x;
-            coord_f.position.y = fantome_bleu.position.y;}
+            coord_f.position.x = fantome[0].position.x;
+            coord_f.position.y = fantome[0].position.y;}
         
         if(tps == 1){
-            coord_f.position.x = fantome_orange.position.x;
-            coord_f.position.y = fantome_orange.position.y;}
+            coord_f.position.x = fantome[1].position.x;
+            coord_f.position.y = fantome[1].position.y;}
         
         if(tps == 2){
-            coord_f.position.x = fantome_rose.position.x;
-            coord_f.position.y = fantome_rose.position.y;}
+            coord_f.position.x = fantome[2].position.x;
+            coord_f.position.y = fantome[2].position.y;}
             
         
         if(tps == 3){
-            coord_f.position.x = fantome_rouge.position.x;
-            coord_f.position.y = fantome_rouge.position.y;}
-        
+            coord_f.position.x = fantome[3].position.x;
+            coord_f.position.y = fantome[3].position.y;}
     }
     
     
@@ -99,3 +83,5 @@ FANTOME creer_fantome(){
 /*FANTOME vers_pacman(FANTOME f){
 
 }*/
+
+
