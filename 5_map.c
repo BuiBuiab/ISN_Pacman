@@ -17,7 +17,7 @@ int couleur_map(POINT p){
     printf("Couleur  C1 : 0x%08X\n\n", couleur_RGB(9, 250, 255));
     fflush(stdout);*/
     
-    if( c == couleur_RGB(255, 0, 0) )
+    if( c == couleur_RGB(9, 250, 255) )
         couleur = 1;
     
     
@@ -25,12 +25,15 @@ int couleur_map(POINT p){
         couleur = 2;
     
     
-    if( c == couleur_RGB(9, 250, 255) )
+    if( c == couleur_RGB(0, 0, 0) )
         couleur = 3;
     
     
-    if( c == couleur_RGB(0, 250, 0) )
+    if( c == couleur_RGB(0, 255, 0) )
         couleur = 4;
+        
+    if( c == couleur_RGB(255, 255, 255) )
+        couleur = 5;
     
     
     return couleur;

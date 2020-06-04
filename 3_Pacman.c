@@ -10,8 +10,8 @@ void dessiner_pacman(PACMAN p, int frame){
 PACMAN creer_pacman(){
     PACMAN p;
     
-    p.position.x = LARGEUR/2;
-    p.position.y = HAUTEUR/2+35;
+    p.position.x = 450;
+    p.position.y = 462;
     
     return p;
 }
